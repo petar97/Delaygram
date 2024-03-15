@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import usePhotos from '../hooks/use-photos';
 import Post from './post';
 import LoggedInUserContext from '../context/logged-in-user';

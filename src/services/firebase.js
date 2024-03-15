@@ -79,9 +79,9 @@ export async function getUserFollowing(userId, following) {
 }
 
 export async function updateLoggedInUserFollowing(
-    loggedInUserDocId, // currently logged in user document id (karl's profile)
-    profileId, // the user that karl requests to follow
-    isFollowingProfile // true/false (am i currently following this person?)
+    loggedInUserDocId,
+    profileId,
+    isFollowingProfile
   ) {
     return firebase
       .firestore()
@@ -95,9 +95,9 @@ export async function updateLoggedInUserFollowing(
 }
   
 export async function updateFollowedUserFollowers(
-  profileDocId, // currently logged in user document id (karl's profile)
-  loggedInUserDocId, // the user that karl requests to follow
-  isFollowingProfile // true/false (am i currently following this person?)
+  profileDocId,
+  loggedInUserDocId,
+  isFollowingProfile
   ) {
   return firebase
       .firestore()
@@ -128,9 +128,9 @@ export async function getPhotos(userId, following) {
       if (photo.likes.includes(userId)) {
           userLikedPhoto = true;
       }
-      // photo.userId = 2
+
       const user = await getUserByUserId(photo.userId);
-      // raphael
+      
       const { username } = user[0];
       return { username, ...photo, userLikedPhoto };
     })
@@ -176,14 +176,8 @@ export async function toggleFollow(
   profileUserId,
   followingUserId
 ) {
-  // 1st param: karl's doc id
-  // 2nd param: raphael's user id
-  // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
   await updateLoggedInUserFollowing(activeUserDocId, profileUserId, isFollowingProfile);
 
-  // 1st param: karl's user id
-  // 2nd param: raphael's doc id
-  // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
   await updateFollowedUserFollowers(profileDocId, followingUserId, isFollowingProfile);
 }
 
@@ -205,9 +199,9 @@ export async function getMyPhotos(userId) {
       if (photo.likes.includes(userId)) {
         userLikedPhoto = true;
       }
-      // photo.userId = 2
+
       const user = await getUserByUserId(photo.userId);
-      // raphael
+
       const { username } = user[0];
       return { username, ...photo, userLikedPhoto };
     })
